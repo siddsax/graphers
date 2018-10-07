@@ -30,4 +30,4 @@ def barPlot(y, x_label, y_label, x=None, title=None, font=1, ylim=0, extreme=0):
 
 
 y = np.array([1,5,10,11])
-barPlot(y, 'asd', 'www', font=3)
+barPlot(y, 'some categories', 'some value', font=1)
