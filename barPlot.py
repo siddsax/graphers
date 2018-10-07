@@ -1,24 +1,33 @@
-import matplotlib.pyplot as plt
-import pandas as pd
 import seaborn as sns
 import numpy as np
-# # Load iris data
-# titanic = sns.load_dataset("titanic")
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib
+import pandas as pd
 
-# # Construct iris plot
-# g = sns.factorplot("class", "survived", "sex", data=titanic, kind="bar", palette="muted", legend=True)
-# # Show plot
-def plotBar1(y, x_label, y_label, x=None, title=None, font=1, ylim=0):
+def barPlot(y, x_label, y_label, x=None, title=None, font=1, ylim=0, extreme=0):
     if x is None:
         x = np.arange(len(y))
-    data = pd.DataFrame(data={x_label: x, y_label: y})
-    sns.set(style="white", font_scale=font)
-    # tips = sns.load_dataset("tips")
-    lm = sns.factorplot(x_label, y_label, data=data, kind='bar')
-    # axes = lm.axes
+
+    if extreme:
+        matplotlib.rcParams.update({'font.size': font*10})
+        plt.bar(x, y, alpha=0.5)
+        ax = plt.gca()
+        ax.set_xlabel(x_label)
+        ax.set_ylabel(y_label)
+        ax.set_title(title)
+        ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('%d'))
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(base=200))
+    else:
+        data = pd.DataFrame(data={x_label: x, y_label: y})
+        sns.set(style="white", font_scale=font)
+        ax = sns.factorplot(x_label, y_label, data=data, kind='bar')
+
     if ylim:
-        lm.set(ylim=(0, ylim))
+        ax.set(ylim=(0, ylim))
+    
     plt.show()
 
-# y = [.01, .4, .004, .9, .5]
-# plotBar1(y, 'asd', 'www', font=1.5)
+
+y = np.array([1,5,10,11])
+barPlot(y, 'asd', 'www', font=3)
