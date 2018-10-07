@@ -14,6 +14,10 @@ Fed up with directly using matplotlib again and again from scratch, this is my o
 
 1) barPlot
 
+<p float="center">
+  <img src="/barPlot.png" width="300" />
+</p>
+
 Plots a single bar plot using seaborn. 
 ```python
 barPlot( y, x_label, y_label, x=None, title=None, font=1, ylim=0, extreme=0)
@@ -37,6 +41,10 @@ ylim -> limit of the y axis. By default adjusted by data
 extreme -> if there are lots of data points directly use matplotlib
 ```
 2) multiBarPlot
+
+<p float="center">
+  <img src="/multiBarPlot.png" width="500" />
+</p>
 
 Bar plots with multiple bars
 ```python
