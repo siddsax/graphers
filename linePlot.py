@@ -3,21 +3,45 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-hour, direction = np.meshgrid(np.arange(24), np.arange(1,3))
-df = pd.DataFrame({"hour": hour.flatten(), "direction": direction.flatten()})
-df["hourly_avg_count"] = np.random.randint(14,30, size=len(df))
 
 
-font=1.5
-sns.set(style="white", font_scale=font)
-x = np.array([5, 10, 20, 30, 5, 10, 20, 30])#.reshape((2, 4))
-y = np.array([28.37, 30.97, 33.03, 33.27, 30.14, 33.21, 36.06, 38.06])#.reshape((2,4))
-z = ['MLN', 'MLN', 'MLN' , 'MLN', 'MLN-SS', 'MLN-SS', 'MLN-SS', 'MLN-SS']
-df = pd.DataFrame({'Precision @1' : x, 'Models': z, 'Percentage Data': y})
-plt.figure(figsize=(12,8))
-sns.tsplot(df, time='Precision @1', unit = "Models", 
-               condition='Models', value='Percentage Data')
+def linePlot(y, x_label, y_label, x=None, z=None, z_label=None, title=None, font=1):
+    if x is None:
+        x = np.arange(len(y))
 
-plt.title('Precision score on NUS-WIDE')
 
-plt.show()
+    sns.set(style="white", font_scale=font)
+
+    
+    if z_label is not None:
+        df = pd.DataFrame({x_label : x, z_label: z, y_label : y})
+        sns.tsplot(df, time=x_label, unit = z_label, condition=z_label, value=y_label)
+    else:
+        df = pd.DataFrame({x_label : x, y_label : y})
+        sns.lineplot(x= x_label, y = y_label, data=df)
+
+    if title is not None:    
+        plt.title(title)
+
+    plt.show()
+
+
+
+x = np.array(range(10))+1
+y = np.array([90.800, 92.330, 93.180, 93.760, 94.140, 94.130, 94.270, 94.220, 94.210, 94.170 ])
+
+x_label = 'Models'
+y_label = 'Accuracies'
+title = 'Accuracies on Cifar10'
+
+# x = np.array([5, 10, 20, 30, 5, 10, 20, 30])#.reshape((2, 4))
+# y1 =  [28.37, 30.97, 33.03, 33.27]
+# y2 =  [30.14, 33.21, 36.06, 38.06]
+# y = np.array(y1 + y2)
+# z = ['label-1']*len(y1) + ['label-2']*len(y2)
+# z_label = 'Model'
+
+
+linePlot(y, x_label, y_label, x, title=title)
+
+
