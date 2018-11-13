@@ -111,7 +111,7 @@ z_label -> z label name
 
 See file for explanation. Demo can be run with 
 
-'''bash
+```bash
 python -m visdom.server # navigate to http://localhost:8097/ in a web browser
 python vizPlot.py
 ```
