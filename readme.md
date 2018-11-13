@@ -108,6 +108,7 @@ z_label -> z label name
 4) Interactive plotting with Visdom.
 
 ![](vizPlot.gif)
+
 See file for explanation. Demo can be run with 
 
 '''bash
